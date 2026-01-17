@@ -118,21 +118,22 @@ In medical diagnosis, **recall** (sensitivity) is often more important than prec
 ```
 BreastCancer/
 │
-├── app.py                          # Streamlit web application
-├── requirements.txt                # Python dependencies
-├── README.md                       # Project documentation
+├── app.py                              # Streamlit web application
+├── requirements.txt                    # Python dependencies
+├── README.md                           # Project documentation
 │
 └── model/
-    ├── train_models.py            # Model training script
-    ├── logistic_regression.py     # Saved Logistic Regression model
-    ├── decision_tree.py           # Saved Decision Tree model
-    ├── knn.py                     # Saved KNN model
-    ├── naive_bayes.py             # Saved Naive Bayes model
-    ├── random_forest.py           # Saved Random Forest model
-    ├── xgboost.py                 # Saved XGBoost model
-    ├── scaler.py                  # Feature scaler
-    ├── test_data.csv              # Test dataset
-    └── model_results.csv          # Comparison results
+    ├── train_models.py                # Model training script
+    ├── logistic_regression_model.py   # Saved Logistic Regression model (Python format)
+    ├── decision_tree_model.py         # Saved Decision Tree model (Python format)
+    ├── knn_model.py                   # Saved KNN model (Python format)
+    ├── naive_bayes_model.py           # Saved Naive Bayes model (Python format)
+    ├── random_forest_model.py         # Saved Random Forest model (Python format)
+    ├── xgboost_model.py               # Saved XGBoost model loader (Python format)
+    ├── xgboost_booster.json           # XGBoost booster configuration (JSON format)
+    ├── scaler_model.py                # Feature scaler (Python format)
+    ├── test_data.csv                  # Test dataset
+    └── model_results.csv              # Comparison results
 ```
 
 ---
@@ -246,12 +247,3 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
-
-
-
-
-
-
-
-
-
