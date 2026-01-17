@@ -149,7 +149,7 @@ BreastCancer/
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/kak4bmh/ML-Assignment/tree/main
+   git clone https://github.com/kak4bmh/ML
    cd ML/BreastCancer
    ```
 2. **Install dependencies:**
@@ -245,3 +245,4 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
