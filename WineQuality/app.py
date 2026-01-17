@@ -251,7 +251,7 @@ else:
 # Footer
 st.divider()
 st.markdown("""
----
 **ML Assignment 2** | M.Tech AIML | Wine Quality Classification | January 2026
 """)
+
 
