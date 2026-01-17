@@ -111,23 +111,24 @@ The assignment demonstrates the complete machine learning workflow: data prepara
 ## 🚀 Project Structure
 
 ```
-ML-Assignment-2/
+WineQuality/
 │
-├── app.py                      # Streamlit web application
-├── requirements.txt            # Python dependencies
-├── README.md                   # Project documentation (this file)
+├── app.py                              # Streamlit web application
+├── requirements.txt                    # Python dependencies
+├── README.md                           # Project documentation (this file)
 │
 └── model/
-    ├── train_models.py         # Model training script
-    ├── test_data.csv           # Test dataset for evaluation
-    ├── model_results.csv       # Comparison results for all models
-    ├── scaler.pkl              # Fitted StandardScaler object
-    ├── logistic_regression_model.pkl
-    ├── decision_tree_model.pkl
-    ├── knn_model.pkl
-    ├── naive_bayes_model.pkl
-    ├── random_forest_model.pkl
-    └── xgboost_model.pkl
+    ├── train_models.py                # Model training script
+    ├── test_data.csv                  # Test dataset for evaluation
+    ├── model_results.csv              # Comparison results for all models
+    ├── scaler_model.py                # Fitted StandardScaler (Python format)
+    ├── logistic_regression_model.py   # Logistic Regression model (Python format)
+    ├── decision_tree_model.py         # Decision Tree model (Python format)
+    ├── k-nearest_neighbors_model.py   # KNN model (Python format)
+    ├── naive_bayes_model.py           # Naive Bayes model (Python format)
+    ├── random_forest_model.py         # Random Forest model (Python format)
+    ├── xgboost_model.py               # XGBoost model loader (Python format)
+    └── xgboost_booster.json           # XGBoost booster configuration (JSON format)
 ```
 
 ---
@@ -265,7 +266,8 @@ The web application includes the following required features:
 - **Streamlit:** Web application framework
 - **Pandas & NumPy:** Data manipulation
 - **Matplotlib & Seaborn:** Visualization
-- **Pickle:** Model serialization
+
+**Note:** All models are saved in Python (.py) format instead of pickle (.pkl) for better portability, transparency, and version compatibility. Each model file contains the model parameters and prediction functions as pure Python code.
 
 ---
 
@@ -274,4 +276,3 @@ The web application includes the following required features:
 This project is submitted as part of M.Tech AIML coursework at BITS Pilani.
 
 ---
-
