@@ -189,7 +189,7 @@ The interactive web application includes:
 
 ### Steps to Deploy:
 
-1. Push your code to GitHub repository
+1. Push your directory to GitHub repository
 2. Go to https://streamlit.io/cloud
 3. Sign in with your GitHub account
 4. Click **"New App"**
@@ -245,6 +245,7 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
 
 
 
