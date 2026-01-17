@@ -10,7 +10,6 @@ import pickle
 import warnings
 warnings.filterwarnings('ignore')
 
-from sklearn.datasets import load_breast_cancer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
@@ -35,13 +34,24 @@ from sklearn.metrics import (
 )
 
 def load_and_prepare_data():
-    """Load the Breast Cancer Wisconsin dataset and prepare it for training"""
-    print("Loading Breast Cancer Wisconsin Dataset...")
-    data = load_breast_cancer()
+    """Load the Breast Cancer Wisconsin dataset from UCI and prepare it for training"""
+    print("Loading Breast Cancer Wisconsin Dataset from UCI...")
     
-    # Create DataFrame
-    df = pd.DataFrame(data.data, columns=data.feature_names)
-    df['target'] = data.target
+    # Load from UCI Machine Learning Repository
+    url = "https://archive.ics.uci.edu/ml/machine-learning-databases/breast-cancer-wisconsin/wdbc.data"
+    
+    # Column names for the dataset
+    column_names = ['ID', 'Diagnosis'] + [f'feature_{i}' for i in range(1, 31)]
+    
+    # Read the dataset
+    df = pd.read_csv(url, header=None, names=column_names)
+    
+    # Drop ID column as it's not a feature
+    df = df.drop('ID', axis=1)
+    
+    # Convert diagnosis to binary (M=1 for Malignant, B=0 for Benign)
+    df['target'] = (df['Diagnosis'] == 'M').astype(int)
+    df = df.drop('Diagnosis', axis=1)
     
     # Features and target
     X = df.drop('target', axis=1)
@@ -210,3 +220,4 @@ if __name__ == "__main__":
     print("\n✓ All models trained and saved successfully!")
     print("✓ Model files saved in 'model/' directory")
     print("✓ Test data saved for Streamlit app")
+
