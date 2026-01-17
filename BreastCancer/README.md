@@ -195,7 +195,7 @@ The interactive web application includes:
 4. Click **"New App"**
 5. Select your repository
 6. Choose branch: `main`
-7. Select main file: `app.py`
+7. Select main file: `BreastCancer/app.py`
 8. Click **"Deploy"**
 
 The app will be live within a few minutes at: `https://ml-assignment-2025aa05388-breast-cancer.streamlit.app`
@@ -245,4 +245,5 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
 
