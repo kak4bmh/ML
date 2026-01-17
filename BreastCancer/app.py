@@ -6,10 +6,11 @@ Interactive Classification Model Comparison
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
+import importlib.util
+import sys
 from sklearn.metrics import (
     accuracy_score,
     roc_auc_score,
@@ -63,21 +64,24 @@ model_choice = st.sidebar.selectbox(
 
 # Model file mapping
 model_files = {
-    "Logistic Regression": str(MODEL_DIR / "logistic_regression.pkl"),
-    "Decision Tree": str(MODEL_DIR / "decision_tree.pkl"),
-    "KNN": str(MODEL_DIR / "knn. pkl"),
-    "Naive Bayes": str(MODEL_DIR / "naive_bayes.pkl"),
-    "Random Forest": str(MODEL_DIR / "random_forest.pkl"),
-    "XGBoost": str(MODEL_DIR / "xgboost.pkl")
+    "Logistic Regression": "logistic_regression",
+    "Decision Tree": "decision_tree",
+    "KNN": "knn",
+    "Naive Bayes": "naive_bayes",
+    "Random Forest": "random_forest",
+    "XGBoost": "xgboost"
 }
 
 @st.cache_resource
-def load_model(model_path):
-    """Load the trained model"""
+def load_model(model_name):
+    """Load the trained model from .py file"""
     try:
-        with open(model_path, 'rb') as f:
-            model = pickle.load(f)
-        return model
+        model_path = MODEL_DIR / f"{model_name}.py"
+        spec = importlib.util.spec_from_file_location(model_name, model_path)
+        model_module = importlib.util.module_from_spec(spec)
+        sys.modules[model_name] = model_module
+        spec.loader.exec_module(model_module)
+        return model_module
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
@@ -161,8 +165,9 @@ if uploaded_file is not None:
                 st.header(f"📈 Model Performance: {model_choice}")
                 
                 # Make predictions
-                y_pred = model.predict(X)
-                y_pred_proba = model.predict_proba(X)[:, 1]
+                y_pred = model.predict(X.values)
+                y_pred_proba_full = model.predict_proba(X.values)
+                y_pred_proba = y_pred_proba_full[:, 1] if y_pred_proba_full.ndim > 1 else y_pred_proba_full[1]
                 
                 # Calculate metrics
                 metrics = calculate_metrics(y, y_pred, y_pred_proba)
@@ -216,16 +221,17 @@ else:
         y = data['target']
         
         # Load selected model
-        model_path = model_files[model_choice]
-        model = load_model(model_path)
+        model_name = model_files[model_choice]
+        model = load_model(model_name)
         
         if model is not None:
             st.markdown("---")
             st.header(f"📈 Model Performance: {model_choice}")
             
             # Make predictions
-            y_pred = model.predict(X)
-            y_pred_proba = model.predict_proba(X)[:, 1]
+            y_pred = model.predict(X.values)
+            y_pred_proba_full = model.predict_proba(X.values)
+            y_pred_proba = y_pred_proba_full[:, 1] if y_pred_proba_full.ndim > 1 else y_pred_proba_full[1]
             
             # Calculate metrics
             metrics = calculate_metrics(y, y_pred, y_pred_proba)
@@ -314,3 +320,4 @@ st.markdown("""
     <p>Classification Model Comparison on Breast Cancer Wisconsin Dataset</p>
 </div>
 """, unsafe_allow_html=True)
+
