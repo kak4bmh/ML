@@ -198,7 +198,7 @@ The interactive web application includes:
 7. Select main file: `BreastCancer/app.py`
 8. Click **"Deploy"**
 
-The app will be live within a few minutes at: `https://ml-assignment-2025aa05388-breast-cancer.streamlit.app`
+The app will be live within a few minutes at: `https://ml-assignment-2025aa05388-bc.streamlit.app`
 
 ---
 
@@ -245,5 +245,6 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
 
 
