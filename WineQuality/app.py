@@ -6,8 +6,11 @@ Wine Quality Classifiction Model Comparison
 import streamlit as st
 import pandas as pd
 import numpy as np
-import pickle
+import matplotlib.pyplot as plt
+import seaborn as sns
 from pathlib import Path
+import importlib.util
+import sys
 from sklearn.metrics import (
     accuracy_score,
     roc_auc_score,
@@ -18,8 +21,23 @@ from sklearn.metrics import (
     confusion_matrix,
     classification_report
 )
-import seaborn as sns
-import matplotlib.pyplot as plt
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model"
+
+@st.cache_resource
+def load_model(model_name):
+    """Load the trained model from .py file"""
+    try:
+        model_path = MODEL_DIR / f"{model_name}.py"
+        spec = importlib.util.spec_from_file_location(model_name, model_path)
+        model_module = importlib.util.module_from_spec(spec)
+        sys.modules[model_name] = model_module
+        spec.loader.exec_module(model_module)
+        return model_module
+    except Exception as e:
+        st.error(f"Error loading model: {e}")
+        return None
 
 # Page configuration
 st.set_page_config(
@@ -27,9 +45,6 @@ st.set_page_config(
     page_icon="🍷",
     layout="wide"
 )
-
-BASE_DIR = Path(__file__).resolve().parent
-MODEL_DIR = BASE_DIR / "model"
 
 # Title and description
 st.title("🍷 Wine Quality Classification App")
@@ -45,12 +60,12 @@ st.sidebar.header("Model Configuration")
 
 # Model selection dropdown
 model_options = {
-    'Logistic Regression': str(MODEL_DIR / 'logistic_regression_model.pkl'),
-    'Decision Tree': str(MODEL_DIR / 'decision_tree_model.pkl'),
-    'K-Nearest Neighbors': str(MODEL_DIR / 'knn_model.pkl'),
-    'Naive Bayes': str(MODEL_DIR / 'naive_bayes_model.pkl'),
-    'Random Forest': str(MODEL_DIR / 'random_forest_model.pkl'),
-    'XGBoost': str(MODEL_DIR / 'xgboost_model.pkl')
+    'Logistic Regression': 'logistic_regression_model',
+    'Decision Tree': 'decision_tree_model',
+    'KNN': 'knn_model',
+    'Naive Bayes': 'naive_bayes_model',
+    'Random Forest': 'random_forest_model',
+    'XGBoost': 'xgboost_model'
 }
 
 selected_model_name = st.sidebar.selectbox(
@@ -111,7 +126,7 @@ if uploaded_file is not None:
         
         # Load scaler
         try:
-            scaler = pickle.load(open(MODEL_DIR / 'scaler.pkl', 'rb'))
+            scaler = load_model('scaler_model')
             X_test_scaled = scaler.transform(X_test)
         except FileNotFoundError:
             st.warning("⚠️ Scaler not found. Using unscaled features.")
@@ -119,10 +134,10 @@ if uploaded_file is not None:
         
         # Load selected model
         try:
-            model = pickle.load(open(model_options[selected_model_name], 'rb'))
+            model = load_model(model_options[selected_model_name])
             st.success(f"✅ Loaded model: **{selected_model_name}**")
         except FileNotFoundError:
-            st.error(f"❌ Model file not found: {model_options[selected_model_name]}")
+            st.error(f"❌ Model file not found: model/{model_options[selected_model_name]}.py")
             st.stop()
         
         # Make predictions
@@ -251,8 +266,9 @@ else:
 # Footer
 st.divider()
 st.markdown("""
-**ML Assignment 2** | M.Tech AIML | Wine Quality Classification Model
-""")
-
-
+<div style='text-align: center'>
+    <p><b>ML Assignment 2 - M.Tech AIML</b></p>
+    <p>Classification Model on Wine Quality Classification</p>
+</div>
+""", unsafe_allow_html=True)
 
