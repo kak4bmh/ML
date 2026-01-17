@@ -64,12 +64,12 @@ model_choice = st.sidebar.selectbox(
 
 # Model file mapping
 model_files = {
-    "Logistic Regression": "logistic_regression",
-    "Decision Tree": "decision_tree",
-    "KNN": "knn",
-    "Naive Bayes": "naive_bayes",
-    "Random Forest": "random_forest",
-    "XGBoost": "xgboost"
+    "Logistic Regression": "logistic_regression_model",
+    "Decision Tree": "decision_tree_model",
+    "KNN": "knn_model",
+    "Naive Bayes": "naive_bayes_model",
+    "Random Forest": "random_forest_model",
+    "XGBoost": "xgboost_model"
 }
 
 @st.cache_resource
@@ -320,4 +320,5 @@ st.markdown("""
     <p>Classification Model Comparison on Breast Cancer Wisconsin Dataset</p>
 </div>
 """, unsafe_allow_html=True)
+
 
