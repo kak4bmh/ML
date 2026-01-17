@@ -269,30 +269,9 @@ The web application includes the following required features:
 
 ---
 
-## 📝 Assignment Requirements Checklist
-
-- ✅ Dataset with minimum 12 features and 500 instances
-- ✅ 6 classification models implemented
-- ✅ 6 evaluation metrics calculated for each model
-- ✅ Streamlit app with all required features
-- ✅ GitHub repository with proper structure
-- ✅ requirements.txt for deployment
-- ✅ README.md with comprehensive documentation
-- ✅ Model comparison table with observations
-- ✅ Ready for Streamlit Community Cloud deployment
-
----
-
-## 📧 Contact & Submission
-
-**Course:** M.Tech AIML - Machine Learning
-**Assignment:** Assignment 2
-**Submission Deadline:** 15-Feb-2026
-
----
-
 ## 📄 License
 
 This project is submitted as part of M.Tech AIML coursework at BITS Pilani.
 
 ---
+
