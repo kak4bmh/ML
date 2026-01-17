@@ -1,13 +1,13 @@
 """
-Wine Quality Classification - Streamlit Web Application
-Author: M.Tech AIML Student
-Date: January 2026
+ML Assignment 2 - Streamlit Web Application
+Wine Quality Classifiction Model Comparison
 """
 
 import streamlit as st
 import pandas as pd
 import numpy as np
 import pickle
+from pathlib import Path
 from sklearn.metrics import (
     accuracy_score,
     roc_auc_score,
@@ -28,6 +28,9 @@ st.set_page_config(
     layout="wide"
 )
 
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "model"
+
 # Title and description
 st.title("🍷 Wine Quality Classification App")
 st.markdown("""
@@ -42,12 +45,12 @@ st.sidebar.header("Model Configuration")
 
 # Model selection dropdown
 model_options = {
-    'Logistic Regression': 'model/logistic_regression_model.pkl',
-    'Decision Tree': 'model/decision_tree_model.pkl',
-    'K-Nearest Neighbors': 'model/knn_model.pkl',
-    'Naive Bayes': 'model/naive_bayes_model.pkl',
-    'Random Forest': 'model/random_forest_model.pkl',
-    'XGBoost': 'model/xgboost_model.pkl'
+    'Logistic Regression': str(MODEL_DIR / 'logistic_regression_model.pkl'),
+    'Decision Tree': str(MODEL_DIR / 'decision_tree_model.pkl'),
+    'K-Nearest Neighbors': str(MODEL_DIR / 'knn_model.pkl'),
+    'Naive Bayes': str(MODEL_DIR / 'naive_bayes_model.pkl'),
+    'Random Forest': str(MODEL_DIR / 'random_forest_model.pkl'),
+    'XGBoost': str(MODEL_DIR / 'xgboost_model.pkl')
 }
 
 selected_model_name = st.sidebar.selectbox(
@@ -108,7 +111,7 @@ if uploaded_file is not None:
         
         # Load scaler
         try:
-            scaler = pickle.load(open('model/scaler.pkl', 'rb'))
+            scaler = pickle.load(open(MODEL_DIR / 'scaler.pkl', 'rb'))
             X_test_scaled = scaler.transform(X_test)
         except FileNotFoundError:
             st.warning("⚠️ Scaler not found. Using unscaled features.")
@@ -189,7 +192,7 @@ if uploaded_file is not None:
         # Model comparison (if results file exists)
         st.header("🏆 Model Comparison")
         try:
-            results_df = pd.read_csv('model/model_results.csv')
+            results_df = pd.read_csv(MODEL_DIR / 'model_results.csv')
             st.dataframe(results_df.style.format({
                 'Accuracy': '{:.4f}',
                 'AUC': '{:.4f}',
@@ -251,3 +254,4 @@ st.markdown("""
 ---
 **ML Assignment 2** | M.Tech AIML | Wine Quality Classification | January 2026
 """)
+
