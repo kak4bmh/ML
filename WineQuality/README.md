@@ -220,9 +220,9 @@ The web application includes the following required features:
    - Select your repository
    - Choose branch: `main`
    - Select main file: `WineQuality/app.py`
-   - Update App URL: `ml-assignment-2025aa05388-wq`
+   - Update App URL: `ml-assignment-2025aa05388-winequality`
    - Click **"Deploy"**
-The app will be live within few minutes at: 'https://ml-assignment-2025aa05388-wq.streamlit.app'
+The app will be live within few minutes at: 'https://ml-assignment-2025aa05388-winequality.streamlit.app'
 
 3. **Wait for deployment:**
 
@@ -299,4 +299,5 @@ This project is submitted as part of M.Tech AIML coursework at BITS Pilani.
 ---
 
 **Note:** This README content is part of the assignment submission PDF as per requirement 2.4 in the assignment document.
+
 
