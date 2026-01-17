@@ -73,7 +73,7 @@ def load_and_prepare_data():
     X_test_scaled = scaler.transform(X_test)
     
     # Save test data for Streamlit app
-    test_df = pd.DataFrame(X_test_scaled, columns=data.feature_names)
+    test_df = pd.DataFrame(X_test_scaled, columns=X.columns)
     test_df['target'] = y_test.values
     test_df.to_csv('model/test_data.csv', index=False)
     print("Test data saved to model/test_data.csv")
@@ -82,7 +82,7 @@ def load_and_prepare_data():
     with open('model/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)
     
-    return X_train_scaled, X_test_scaled, y_train, y_test, data.feature_names
+    return X_train_scaled, X_test_scaled, y_train, y_test, X.columns
 
 def calculate_metrics(y_true, y_pred, y_pred_proba, model_name):
     """Calculate all required evaluation metrics"""
@@ -220,4 +220,5 @@ if __name__ == "__main__":
     print("\n✓ All models trained and saved successfully!")
     print("✓ Model files saved in 'model/' directory")
     print("✓ Test data saved for Streamlit app")
+
 
