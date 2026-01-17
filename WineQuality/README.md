@@ -145,8 +145,8 @@ ML-Assignment-2/
 1. **Clone the repository:**
 
 ```bash
-git clone <your-repository-url>
-cd ML-Assignment-2
+git clone https://github.com/kak4bmh/ML
+cd ML/WineQuality
 ```
 
 2. **Install dependencies:**
@@ -158,9 +158,7 @@ pip install -r requirements.txt
 3. **Train the models:**
 
 ```bash
-cd model
-python train_models.py
-cd ..
+python model/train_models.py
 ```
 
 4. **Run the Streamlit app locally:**
@@ -169,8 +167,7 @@ cd ..
 streamlit run app.py
 ```
 
-The app will open in your browser at `http://localhost:8501`
-
+5. **Access the application:** The app will open in your browser at `http://localhost:8501`
 ---
 
 ## 📱 Streamlit App Features
@@ -214,28 +211,19 @@ The web application includes the following required features:
 
 ## 🌐 Deployment on Streamlit Community Cloud
 
-### Deployment Steps
-
-1. **Push code to GitHub:**
-
-```bash
-git init
-git add .
-git commit -m "Initial commit - ML Assignment 2"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
-
-2. **Deploy on Streamlit Cloud:**
-
+1. **Deploy on Streamlit Cloud:**
+   
+   - Push your directory to GitHub repository
    - Go to https://streamlit.io/cloud
    - Sign in with your GitHub account
-   - Click "New App"
+   - Click **"New App"**
    - Select your repository
    - Choose branch: `main`
-   - Select main file: `app.py`
-   - Click "Deploy"
+   - Select main file: `WineQuality/app.py`
+   - Update App URL: `ml-assignment-2025aa05388-wq`
+   - Click **"Deploy"**
+The app will be live within few minutes at: 'https://ml-assignment-2025aa05388-wq.streamlit.app'
+
 3. **Wait for deployment:**
 
    - Deployment typically takes 2-5 minutes
@@ -311,3 +299,4 @@ This project is submitted as part of M.Tech AIML coursework at BITS Pilani.
 ---
 
 **Note:** This README content is part of the assignment submission PDF as per requirement 2.4 in the assignment document.
+
