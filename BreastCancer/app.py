@@ -138,7 +138,26 @@ st.markdown("---")
 st.header("📊 Dataset Upload")
 st.markdown("Upload your test dataset (CSV format) or use the provided test data.")
 
+# Add download button for test data
 uploaded_file = st.file_uploader("Choose a CSV file", type="csv")
+
+try:
+    test_data_path = MODEL_DIR / "test_data.csv"
+    if test_data_path.exists():
+        with open(test_data_path, "rb") as file:
+            test_data_bytes = file.read()
+        
+        st.markdown("**Download the test data if you do not have the actual ones.**")
+        st.download_button(
+            label="📥 Download Test Data",
+            data=test_data_bytes,
+            file_name="breast_cancer_test_data.csv",
+            mime="text/csv"
+        )
+    else:
+        st.warning("⚠️ Test data file not found in the model directory.")
+except Exception as e:
+    st.warning(f"⚠️ Could not load test data for download: {e}")
 
 if uploaded_file is not None:
     # User uploaded file
@@ -206,69 +225,7 @@ if uploaded_file is not None:
     except Exception as e:
         st.error(f"❌ Error processing file: {e}")
 else:
-    # Use default test data if available
-    st.info("ℹ️ No file uploaded. Loading default test data...")
-    
-    try:
-        data = pd.read_csv(MODEL_DIR / "test_data.csv")
-        
-        st.subheader("Dataset Preview (Default Test Data)")
-        st.dataframe(data.head(10))
-        
-        st.write(f"**Shape:** {data.shape[0]} rows × {data.shape[1]} columns")
-        
-        X = data.drop('target', axis=1)
-        y = data['target']
-        
-        # Load selected model
-        model_name = model_files[model_choice]
-        model = load_model(model_name)
-        
-        if model is not None:
-            st.markdown("---")
-            st.header(f"📈 Model Performance: {model_choice}")
-            
-            # Make predictions
-            y_pred = model.predict(X.values)
-            y_pred_proba_full = model.predict_proba(X.values)
-            y_pred_proba = y_pred_proba_full[:, 1] if y_pred_proba_full.ndim > 1 else y_pred_proba_full[1]
-            
-            # Calculate metrics
-            metrics = calculate_metrics(y, y_pred, y_pred_proba)
-            
-            # Display metrics
-            st.subheader("🎯 Evaluation Metrics")
-            
-            col1, col2, col3 = st.columns(3)
-            
-            with col1:
-                st.metric("Accuracy", f"{metrics['Accuracy']:.4f}")
-                st.metric("Precision", f"{metrics['Precision']:.4f}")
-            
-            with col2:
-                st.metric("AUC Score", f"{metrics['AUC Score']:.4f}")
-                st.metric("Recall", f"{metrics['Recall']:.4f}")
-            
-            with col3:
-                st.metric("F1 Score", f"{metrics['F1 Score']:.4f}")
-                st.metric("MCC", f"{metrics['MCC']:.4f}")
-            
-            # Confusion Matrix
-            st.markdown("---")
-            st.subheader("🔍 Confusion Matrix")
-            fig = plot_confusion_matrix(y, y_pred, model_choice)
-            st.pyplot(fig)
-            
-            # Classification Report
-            st.markdown("---")
-            st.subheader("📋 Classification Report")
-            report_df = display_classification_report(y, y_pred)
-            st.dataframe(report_df.style.highlight_max(axis=0, color='lightgreen'))
-            
-    except FileNotFoundError:
-        st.warning("⚠️ Default test data not found. Please upload a CSV file.")
-    except Exception as e:
-        st.error(f"❌ Error: {e}")
+    st.warning("⚠️ Please upload a CSV file to view model performance metrics.")
 
 # Model Comparison Section
 st.markdown("---")
@@ -320,5 +277,6 @@ st.markdown("""
     <p>Classification Model Comparison on Breast Cancer Wisconsin Dataset</p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
