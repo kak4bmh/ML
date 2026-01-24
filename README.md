@@ -116,7 +116,6 @@ In medical diagnosis, **recall** (sensitivity) is often more important than prec
 ## Project Structure
 
 ```
-BreastCancer/
 │
 ├── app.py                              # Streamlit web application
 ├── requirements.txt                    # Python dependencies
@@ -151,7 +150,6 @@ BreastCancer/
 
    ```bash
    git clone https://github.com/kak4bmh/ML
-   cd ML/BreastCancer
    ```
 2. **Install dependencies:**
 
@@ -196,7 +194,7 @@ The interactive web application includes:
 4. Click **"New App"**
 5. Select your repository
 6. Choose branch: `main`
-7. Select main file: `BreastCancer/app.py`
+7. Select main file: `app.py`
 8. Update App URL: `ml-assignment-2025aa05388-breastcancer`
 9. Click **"Deploy"**
 
@@ -247,3 +245,4 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
