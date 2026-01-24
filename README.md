@@ -116,6 +116,7 @@ In medical diagnosis, **recall** (sensitivity) is often more important than prec
 ## Project Structure
 
 ```
+ML
 │
 ├── app.py                              # Streamlit web application
 ├── requirements.txt                    # Python dependencies
@@ -246,5 +247,6 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
 
 
