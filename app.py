@@ -9,8 +9,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from pathlib import Path
-import importlib.util
-import sys
+import pickle
 from sklearn.metrics import (
     accuracy_score,
     roc_auc_score,
@@ -74,14 +73,12 @@ model_files = {
 
 @st.cache_resource
 def load_model(model_name):
-    """Load the trained model from .py file"""
+    """Load the trained model from .pkl file"""
     try:
-        model_path = MODEL_DIR / f"{model_name}.py"
-        spec = importlib.util.spec_from_file_location(model_name, model_path)
-        model_module = importlib.util.module_from_spec(spec)
-        sys.modules[model_name] = model_module
-        spec.loader.exec_module(model_module)
-        return model_module
+        model_path = MODEL_DIR / f"{model_name}.pkl"
+        with open(model_path, 'rb') as f:
+            model = pickle.load(f)
+        return model
     except Exception as e:
         st.error(f"Error loading model: {e}")
         return None
@@ -277,6 +274,7 @@ st.markdown("""
     <p>Classification Model Comparison on Breast Cancer Wisconsin Dataset</p>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
