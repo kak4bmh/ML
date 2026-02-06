@@ -124,14 +124,14 @@ ML
 │
 └── model/
     ├── train_models.py                # Model training script
-    ├── logistic_regression_model.py   # Saved Logistic Regression model (Python format)
-    ├── decision_tree_model.py         # Saved Decision Tree model (Python format)
-    ├── knn_model.py                   # Saved KNN model (Python format)
-    ├── naive_bayes_model.py           # Saved Naive Bayes model (Python format)
-    ├── random_forest_model.py         # Saved Random Forest model (Python format)
-    ├── xgboost_model.py               # Saved XGBoost model loader (Python format)
+    ├── logistic_regression_model.pkl  # Saved Logistic Regression model (Pickle format)
+    ├── decision_tree_model.pkl        # Saved Decision Tree model (Pickle format)
+    ├── knn_model.pkl                  # Saved KNN model (Pickle format)
+    ├── naive_bayes_model.pkl          # Saved Naive Bayes model (Pickle format)
+    ├── random_forest_model.pkl        # Saved Random Forest model (Pickle format)
+    ├── xgboost_model.pkl              # Saved XGBoost model (Pickle format)
     ├── xgboost_booster.json           # XGBoost booster configuration (JSON format)
-    ├── scaler_model.py                # Feature scaler (Python format)
+    ├── scaler.py                      # Feature scaler parameters (Python format)
     ├── test_data.csv                  # Test dataset
     └── model_results.csv              # Comparison results
 ```
@@ -247,6 +247,7 @@ This project is created for educational purposes as part of Machine Learning Ass
 - Dataset: UCI Machine Learning Repository
 - Framework: Streamlit Community
 - Libraries: scikit-learn, XGBoost, and the Python data science ecosystem
+
 
 
 
